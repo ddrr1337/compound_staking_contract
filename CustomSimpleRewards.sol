@@ -3,6 +3,7 @@ pragma solidity ^0.8.0;
 
 import {ERC20} from "./dependencies/tokens/ERC20.sol";
 import {SafeTransferLib} from "./dependencies/utils/SafeTransferLib.sol";
+import {RewardsToken} from './RewardsToken.sol';
 
 import {CompoundInterestLib} from "./dependencies/lib/CompoundInterestLib.sol"; //library
 
@@ -37,8 +38,7 @@ contract CustomSimpleRewards {
     uint256 public totalStaked; // Total amount staked
     mapping(address => uint256) public userStake; // Amount staked per user
 
-    ERC20 public immutable rewardsToken; // Token used as rewards
-    //uint256 public immutable rewardsRate; // Wei rewarded per second among all token holders
+    RewardsToken public immutable rewardsToken; // Token used as rewards
     uint256 public immutable rewardsStart; // Start of the rewards program
     uint256 public immutable rewardsEnd; // End of the rewards program
     RewardsPerToken public rewardsPerToken; // Accumulator to track rewards per token
@@ -48,11 +48,11 @@ contract CustomSimpleRewards {
 
     uint256 public immutable rateOfInterestRay;
     uint256 public immutable startingSupply;
-    uint256 public immutable secondsInAYear = 3600 * 24 * 365;
+
 
     constructor(
         ERC20 stakingToken_,
-        ERC20 rewardsToken_,
+        RewardsToken rewardsToken_,
         uint256 rewardsStart_,
         uint256 rewardsEnd_,
         // Custom
@@ -211,8 +211,13 @@ contract CustomSimpleRewards {
         accumulatedRewards[user].accumulated = (rewardsAvailable - amount)
             .u128();
 
-        // This line would panic if the contract doesn't have enough rewards tokens
-        rewardsToken.safeTransfer(user, amount);
+        
+        
+        //VERY IMOPORTANT!
+        //You need to implement a function mint in rewardsToken to allow this contract to mint!
+
+        rewardsToken.mint(user,amount);
+
         emit Claimed(user, amount);
     }
 
