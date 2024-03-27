@@ -10,16 +10,18 @@ contract RewardsToken is ERC20,Ownable {
 
     modifier onlyAllowedMinter() {
         require(msg.sender == allowedMinter, "Only alowed minter can call this function");
-        _; // Esto indica al compilador que continúe con la ejecución de la función una vez que se haya verificado el modificador
+        _; 
     }
 
-    constructor() ERC20("Tester", "TST") {
-        // Inicializa el contrato con un total de 1 millón de tokens
+    constructor() ERC20("RewardsToken", "RTK") {
+        // Starting some initial supply
         _mint(msg.sender, 1000000 * 10 ** uint(decimals()));
     }
 
-    function setAllowedMinter() external onlyOwner {
+    function setAllowedMinter(address _allowedMinter) external onlyOwner {
         require(allowedMinter == address(0),'allowedMinter is already setted');
+
+        allowedMinter = _allowedMinter;
     }
 
     function mint(address to, uint256 amount) external onlyAllowedMinter {

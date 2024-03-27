@@ -211,11 +211,9 @@ contract CustomSimpleRewards {
         accumulatedRewards[user].accumulated = (rewardsAvailable - amount)
             .u128();
 
-        
-        
         //VERY IMOPORTANT!
         //You need to implement a function mint in rewardsToken to allow this contract to mint!
-
+        //In this repo I already did with a very simple version of an ERC20 whith a mint function.
         rewardsToken.mint(user,amount);
 
         emit Claimed(user, amount);
