@@ -72,7 +72,7 @@ contract CustomSimpleRewards {
     }
 
     // Custom
-    function _customRewardsPerSecond() internal view returns (uint256) {
+    function _customRewardsPerSecond() public view returns (uint256) {
         uint256 compoundSupplyNow = CompoundInterestLib.principalPlusInterest(
             startingSupply,
             rateOfInterestRay,
