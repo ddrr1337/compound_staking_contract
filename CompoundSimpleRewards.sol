@@ -14,7 +14,7 @@ import {CompoundInterestLib} from "./dependencies/lib/CompoundInterestLib.sol"; 
 /// This is a rewriting of [Unipool.sol](https://github.com/k06a/Unipool/blob/master/contracts/Unipool.sol), modified for clarity and simplified.
 /// Careful if using non-standard ERC20 tokens, as they might break things.
 
-contract CustomSimpleRewards {
+contract CompoundSimpleRewards {
     using SafeTransferLib for ERC20;
     using CastU128 for uint256;
 
