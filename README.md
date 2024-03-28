@@ -2,7 +2,7 @@
 
 This contract allows users to stake tokens and receive rewards in a specific token for a certain period of time. Rewards are calculated proportionally to time and total staked, using a defined interest rate.
 
-This is a fork of Alberto Cuesta Cañada's staking contract: [SimpleRewards.sol](https://github.com/alcueca/staking/blob/main/src/SimpleRewards.sol).
+This is a fork of __Alberto Cuesta Cañada's__ staking contract: [SimpleRewards.sol](https://github.com/alcueca/staking/blob/main/src/SimpleRewards.sol).
 
 In this version, a fixed number of tokens per second is no longer used as a reward. Instead, this version focuses on rewarding stakers with a % of the totalSupply. The number of tokens distributed as a reward is recalculated as the totalSupply increases with the minting of new tokens. In summary, this contract applies compound interest to the totalSupply to determine what the totalSupply will be after a certain number of seconds.
 
