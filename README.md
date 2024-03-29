@@ -53,7 +53,7 @@ Additionally, the contract has been modified to be able to pass `rewardsEnd_` wi
 
 
 
-## 2.-Minting Reward Tokens and Usage and Considerations
+## 2.-Minting Reward Tokens and Usage Considerations
 
 
 
