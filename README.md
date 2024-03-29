@@ -1,6 +1,6 @@
 # Staking and Rewards Contract
 
-This contract allows users to stake tokens and receive rewards in a specific token for a certain period of time. Rewards are calculated proportionally to time and total staked, using a defined interest rate.
+This contract allows users to stake tokens and receive rewards in a specific token for a certain period of time, or an infinite time. Rewards are calculated proportionally to time and total staked, using a defined interest rate.
 
 This is a fork of __Alberto Cuesta Cañada's__ staking contract: [SimpleRewards.sol](https://github.com/alcueca/staking/blob/main/src/SimpleRewards.sol).
 
