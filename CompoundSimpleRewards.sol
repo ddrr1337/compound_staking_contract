@@ -8,15 +8,15 @@ import {RewardsToken} from './RewardsToken.sol';
 import {CompoundInterestLib} from "./dependencies/lib/CompoundInterestLib.sol"; //library
 
 /// @notice Permissionless staking contract for a single rewards program.
-/// From the start of the program, to the end of the program, a fixed amount of rewards tokens will be distributed among stakers.
-/// The rate at which rewards are distributed is constant over time, but proportional to the amount of tokens staked by each staker.
-/// The contract expects to have received enough rewards tokens by the time they are claimable. The rewards tokens can only be recovered by claiming stakers.
-/// This is a rewriting of [Unipool.sol](https://github.com/k06a/Unipool/blob/master/contracts/Unipool.sol), modified for clarity and simplified.
+/// From the start of the program, to the end of the program, a dinamic amount of rewards tokens will be distributed among stakers.
+/// The rate at which rewards are distributed is dinamic over time, but proportional to the amount of tokens staked by each staker.
+/// The contract no longer needs the rewardsToken to distribute, instead it mints the new tokens. The rewards tokens can only be recovered by claiming stakers.
+/// This is a fork of Alberto Cuesta Cañada's staking contract: https://github.com/alcueca/staking/blob/main/src/SimpleRewards.sol
 /// Careful if using non-standard ERC20 tokens, as they might break things.
 
 contract CompoundSimpleRewards {
     using SafeTransferLib for ERC20;
-    using CastU128 for uint256;
+    using Cast for uint256;
 
     event Staked(address user, uint256 amount);
     event Unstaked(address user, uint256 amount);
@@ -109,7 +109,7 @@ contract CompoundSimpleRewards {
             updateTime = block.timestamp;
         }
 
-        // custom
+
 
         uint256 elapsed = updateTime - rewardsPerTokenIn.lastUpdated;
 
@@ -258,7 +258,7 @@ contract CompoundSimpleRewards {
     }
 }
 
-library CastU128 {
+library Cast {
     function u128(uint256 x) internal pure returns (uint128 y) {
         require(x <= type(uint128).max, "Cast overflow");
         y = uint128(x);
