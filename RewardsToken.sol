@@ -21,7 +21,7 @@ contract RewardsToken is ERC20,Ownable {
     }
 
     // Link ERC20 with stacking contract passing address of stacking contract deployment
-    // This is needed to give permission to stacking contract to jmint tokens
+    // This is needed to give permission to stacking contract to mint tokens
     // Notice you can only call this function once.
     function setAllowedMinter(address _allowedMinter) external onlyOwner {
         require(allowedMinter == address(0),'allowedMinter is already setted');
