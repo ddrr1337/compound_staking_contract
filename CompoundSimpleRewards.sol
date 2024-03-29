@@ -58,8 +58,11 @@ contract CompoundSimpleRewards {
         // Custom
         uint256 _rateOfInterestRay
     ) {
+
         stakingToken = stakingToken_;
         rewardsToken = rewardsToken_;
+        require(rewardsToken.totalSupply()>0, 'No supply found in rewardsToken ERC20');
+
         rewardsStart = rewardsStart_;
         // Pass rewardsEnd == 0 if you want a never ending
         rewardsEnd = rewardsEnd_;
