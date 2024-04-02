@@ -3,7 +3,7 @@ pragma solidity ^0.8.0;
 
 import {ERC20} from "./dependencies/tokens/ERC20.sol";
 import {SafeTransferLib} from "./dependencies/utils/SafeTransferLib.sol";
-import {RewardsToken} from './RewardsToken.sol';
+import {RewardsToken} from "./RewardsToken.sol";
 
 import {CompoundInterestLib} from "./dependencies/lib/CompoundInterestLib.sol"; //library
 
@@ -49,7 +49,6 @@ contract CompoundSimpleRewards {
     uint256 public immutable rateOfInterestRay;
     uint256 public immutable startingSupply;
 
-
     constructor(
         ERC20 stakingToken_,
         RewardsToken rewardsToken_,
@@ -58,10 +57,12 @@ contract CompoundSimpleRewards {
         // Custom
         uint256 _rateOfInterestRay
     ) {
-
         stakingToken = stakingToken_;
         rewardsToken = rewardsToken_;
-        require(rewardsToken.totalSupply()>0, 'No supply found in rewardsToken ERC20');
+        require(
+            rewardsToken.totalSupply() > 0,
+            "Supply not found in rewardsToken ERC20"
+        );
 
         rewardsStart = rewardsStart_;
         // Pass rewardsEnd == 0 if you want a never ending
@@ -111,8 +112,6 @@ contract CompoundSimpleRewards {
             //never ending reward
             updateTime = block.timestamp;
         }
-
-
 
         uint256 elapsed = updateTime - rewardsPerTokenIn.lastUpdated;
 
@@ -217,7 +216,7 @@ contract CompoundSimpleRewards {
         //VERY IMOPORTANT!
         //You need to implement a function mint in rewardsToken to allow this contract to mint!
         //In this repo I already did with a very simple version of an ERC20 whith a mint function.
-        rewardsToken.mint(user,amount);
+        rewardsToken.mint(user, amount);
 
         emit Claimed(user, amount);
     }
