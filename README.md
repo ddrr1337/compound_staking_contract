@@ -86,7 +86,7 @@ The contract uses various libraries and dependencies for its operation, includin
 - `SafeTransferLib`: Library for secure token transfers.
 - `RewardsToken`: Contract of the token used as a reward.
 - `CompoundInterestLib`: Library for compound interest calculations.
-- `CastU128`: Library for secure conversion of `uint256` to `uint128`. (save gas)
+- `Cast`: Library for secure conversion of `uint256` to `uint128`. (save gas)
 
 ## Customizations
 
